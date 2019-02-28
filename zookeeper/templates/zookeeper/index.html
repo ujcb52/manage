@@ -1,0 +1,156 @@
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script language="javascript">
+    function daemon(idx)
+    {
+        var index = '/zookeeper/DaemonState?state=' + idx;
+        location.href=index;
+    }
+    function msg(idx)
+    {
+        var index = '/zookeeper/MsgState?msgstate=' + idx;
+        location.href=index;
+    }
+    function writeCheck() {
+        var form = document.writeform;
+
+        if (!form.delay.value)
+        {
+            alert("Delay Time (second) 를 적어주세요");
+            form.delay.focus();
+            return;
+        }
+        form.submit();
+    }
+</script>
+
+<script>
+$(function(){
+    $('#slide-submenu').on('click',function() {			        
+        $(this).closest('.list-group').fadeOut('slide',function(){
+        	$('.mini-submenu').fadeIn();	
+        });
+        
+      });
+
+	$('.mini-submenu').on('click',function(){		
+        $(this).next('.list-group').toggle('slide');
+        $('.mini-submenu').hide();
+	})
+})
+</script>
+
+<style>
+.mini-submenu{
+  display:none;  
+  background-color: rgba(0, 0, 0, 0);  
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  border-radius: 4px;
+  padding: 9px;  
+  /*position: relative;*/
+  width: 42px;
+
+}
+
+.mini-submenu:hover{
+  cursor: pointer;
+}
+
+.mini-submenu .icon-bar {
+  border-radius: 1px;
+  display: block;
+  height: 2px;
+  width: 22px;
+  margin-top: 3px;
+}
+
+.mini-submenu .icon-bar {
+  background-color: #000;
+}
+
+#slide-submenu{
+  background: rgba(0, 0, 0, 0.45);
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+</head>
+<!--<body onload="javascript:daemon('check');">-->
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2 col-xs-2 sidebar">
+            <div class="mini-submenu">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </div>
+            <div class="list-group">
+                <span href="#" class="list-group-item active">
+                    MENU
+                    <span class="pull-right" id="slide-submenu">
+                        <i class="fa fa-times"></i>
+                    </span>
+                </span>
+                <a href="/zookeeper/" class="list-group-item">Home</a>
+                <a href="/zookeeper/nodelist/" class="list-group-item">Node List</a>
+                <a href="/zookeeper/excludenode/" class="list-group-item">ExcludeNode List</a>
+                <a href="/zookeeper/sendmsg/" class="list-group-item">SendMsg List</a>
+<!--            <a href="#" class="list-group-item">
+                <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
+            </a>-->
+            </div>
+        </div>
+        <div class="span10 col-xs-8">
+            <br>
+            <td>zookeeper watcher 동작 설정 : </td>
+            &emsp;&emsp;
+            <td>
+            <button id="daemon" type="button" class="btn btn-default" OnClick="javascript:daemon('running')">시작</button>
+            </td>
+            &emsp;&emsp;
+            <td>
+            <button id="daemon" type="button" class="btn btn-default" OnClick="javascript:daemon('stop')">정지</button>
+            </td>
+            {% if daemon %}
+            {% for daemonstate in daemon %}
+            <p></p>
+            <p>zookeeper watcher 상태 : <font size="5"><b>{{ daemonstate.state }}</b></font></p>
+            <br>
+            <div class="row">
+              <div class="col-xs-2">
+                Message 발송 설정 :
+              </div>
+              <div class="col-xs-2">
+                <form role="form" name=writeform method=post action="/zookeeper/MsgDelay/">{% csrf_token %}
+                <input type="text" class="form-control" name=delay placeholder="delay">
+              </div>
+              <div class="col-xs-1">
+                <button type="button" class="btn btn-default" OnClick="javascript:writeCheck();">등록</button>
+              </div>
+                </form>
+              <button id="msg" type="button" class="btn btn-default" OnClick="javascript:msg('no')">해제</button>
+              </div>
+            Message 전체 발송 : <font size="5"><b>{{ daemonstate.msgconfig }}</b></font>&emsp;
+            Delay : <font size="5"><b>{{ daemonstate.delay }}s</b></font>
+            {% endfor %}
+            {% endif %}
+           </div>
+        </div>
+</div>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+</body>
+</html>
+

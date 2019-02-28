@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<script language="javascript">
+    function boarddelete(idx)
+    {
+        var index = '/zookeeper/DeleteSpecificRow?privateIpId=' + idx;
+        location.href=index;
+    }
+</script>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Node List</title>
+    <link rel="stylesheet" href="/static/bootstrap/4.1.2/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <table class="table table-striped">
+        <thread>
+        <tr>
+            <th>privateIp</th>
+            <th>HostType</th>
+            <th>state</th>
+            <th>CreateTime</th>
+            <th>DeleteTime</th>
+            <th></th>
+        </tr>
+        </thread>
+    {% if node_list %}
+        <tbody>
+        {% for node in node_list %}
+        <tr>
+<!--            <td>{{ node.privateIpId }}</td>-->
+            <td>{{ node.privateIp }}</td>
+            <td>{{ node.hosttype }}</td>
+            <td>{{ node.state }}</td>
+            <td>{{ node.createtime }}</td>
+            <td>{{ node.deletetime }}</td>
+            <td>
+            <button id="boarddelete" type="button" class="btn btn-default" OnClick="javascript:boarddelete({{ node.privateIpId }})">삭제</button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    {% else %}
+        <p>No node list are available.</p>
+    {% endif %}
+    </table>
+<!--
+    <div class="text-center">
+        <ul class="pagination">
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+        </ul>
+    </div>
+-->
+</div>
+
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/bootstrap/4.1.2/js/bootstrap.js></script>
+</body>
+</html>

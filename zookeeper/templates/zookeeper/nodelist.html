@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<script language="javascript">
+    function boarddelete(idx)
+    {
+        var index = '/zookeeper/DeleteNode?privateIpId=' + idx;
+        location.href=index;
+    }
+</script>
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<script>
+$(function(){
+
+    $('#slide-submenu').on('click',function() {
+        $(this).closest('.list-group').fadeOut('slide',function(){
+                $('.mini-submenu').fadeIn();
+        });
+
+      });
+
+        $('.mini-submenu').on('click',function(){
+        $(this).next('.list-group').toggle('slide');
+        $('.mini-submenu').hide();
+        })
+})
+</script>
+
+<style>
+.mini-submenu{
+  display:none;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  border-radius: 4px;
+  padding: 9px;
+  /*position: relative;*/
+  width: 42px;
+
+}
+
+.mini-submenu:hover{
+  cursor: pointer;
+}
+
+.mini-submenu .icon-bar {
+  border-radius: 1px;
+  display: block;
+  height: 2px;
+  width: 22px;
+  margin-top: 3px;
+}
+
+.mini-submenu .icon-bar {
+  background-color: #000;
+}
+
+#slide-submenu{
+  background: rgba(0, 0, 0, 0.45);
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Node List</title>
+<!--    <link rel="stylesheet" href="/static/bootstrap/4.1.2/css/bootstrap.css">-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-xs-2 sidebar">
+            <div class="mini-submenu">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </div>
+            <div class="list-group">
+                <span href="#" class="list-group-item active">
+                    MENU
+                    <span class="pull-right" id="slide-submenu">
+                        <i class="fa fa-times"></i>
+                    </span>
+                </span>
+                <a href="/zookeeper/" class="list-group-item">Home</a>
+                <a href="/zookeeper/nodelist/" class="list-group-item">Node List</a>
+                <a href="/zookeeper/excludenode/" class="list-group-item">ExcludeNode List</a>
+                <a href="/zookeeper/sendmsg/" class="list-group-item">SendMsg List</a>
+<!--            <a href="#" class="list-group-item">
+                <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
+            </a>-->
+            </div>
+        </div>
+        <div class="col-xs-8">
+    <table class="table table-striped">
+        <thread>
+        <tr>
+            <th>privateIp</th>
+            <th>HostType</th>
+            <th>state</th>
+            <th>CreateTime</th>
+            <th>DeleteTime</th>
+            <th></th>
+        </tr>
+        </thread>
+    {% if node_list %}
+        {% load tz %}
+        <tbody>
+        {% for node in node_list %}
+        <tr>
+<!--            <td>{{ node.privateIpId }}</td>-->
+            <td>{{ node.privateIp }}</td>
+            <td>{{ node.hosttype }}</td>
+            <td>{{ node.state }}</td>
+            <td>{{ node.createtime }}</td>
+            <td>{{ node.deletetime }}</td>
+            <td>
+            <button id="boarddelete" type="button" class="btn btn-default" OnClick="javascript:boarddelete({{ node.privateIpId }})">삭제</button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    {% else %}
+        <p>No node list are available.</p>
+    {% endif %}
+    </table>
+<!--
+    <div class="text-center">
+        <ul class="pagination">
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+        </ul>
+    </div>
+-->
+</div>
+</div>
+</div>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/bootstrap/4.1.2/js/bootstrap.js></script>
+</body>
+</html>

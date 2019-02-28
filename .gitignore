@@ -1,0 +1,9 @@
+#directory
+__pycache__
+migrations
+
+custom_scripts
+.cache
+
+#files
+settings.py

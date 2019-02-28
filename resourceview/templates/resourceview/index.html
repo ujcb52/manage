@@ -1,0 +1,149 @@
+    {% for key, values in zone_list.items %}
+            #### {{ key }} ####<br>
+            <br>
+            basic 8G - Total : {{ values.basic_tcnt_8 }} ea   Available : {{ values.basic_avcnt_8 }} ea   Used % : {{ values.basic_perc_8 }}%<br>
+            basic 16G - Total : {{ values.basic_tcnt_16 }} ea   Available : {{ values.basic_avcnt_16 }} ea   Used % : {{ values.basic_perc_16 }}%<br>
+            <br>
+            premium 32G - Total : {{ values.premium_tcnt_32}} ea   Available : {{ values.premium_avcnt_32 }} ea   Used % : {{ values.premium_perc_32 }}%<br>
+            premium 64G - Total : {{ values.premium_tcnt_64 }} ea   Available : {{ values.premium_avcnt_64 }} ea   Used % : {{ values.premium_perc_64 }}%<br>
+            premium 128G - Total : {{ values.premium_tcnt_128 }} ea   Available : {{ values.premium_avcnt_128 }} ea   Used % : {{ values.premium_perc_128 }}%<br>
+            <br>
+            WAF 4G - Total : {{ values.WAF_tcnt_4 }} ea   Available : {{ values.WAF_avcnt_4 }} ea   Used % : {{ values.WAF_perc_4 }}%<br>
+            WAF 8G - Total : {{ values.WAF_tcnt_8 }} ea   Available : {{ values.WAF_avcnt_8 }} ea   Used % : {{ values.WAF_perc_8 }}%<br>
+            <br>
+            SSD 8G - Total : {{ values.SSD_tcnt_8 }} ea   Available : {{ values.SSD_avcnt_8 }} ea   Used % : {{ values.SSD_perc_8 }}%<br>
+            SSD 16G - Total : {{ values.SSD_tcnt_16 }} ea   Available : {{ values.SSD_avcnt_16 }} ea   Used % : {{ values.SSD_perc_16 }}%<br>
+            SSD 32G - Total : {{ values.SSD_tcnt_32 }} ea   Available : {{ values.SSD_avcnt_32 }} ea   Used % : {{ values.SSD_perc_32 }}%<br>
+            <br>
+            MSSQL 8G - Total : {{ values.MSSQL_tcnt_8 }} ea   Available : {{ values.MSSQL_avcnt_8 }} ea   Used % : {{ values.MSSQL_perc_8 }}%<br>
+            MSSQL 16G - Total : {{ values.MSSQL_tcnt_16 }} ea   Available : {{ values.MSSQL_avcnt_16 }} ea   Used % : {{ values.MSSQL_perc_16 }}%<br>
+            <br>
+            {% if key == 'Zone_1' %}
+                VPS 2G - Total : {{ values.VPS_tcnt_2 }} ea   Available : {{ values.VPS_avcnt_2 }} ea   Used % : {{ values.VPS_perc_2 }}%<br>
+                VPS 4G - Total : {{ values.VPS_tcnt_4 }} ea   Available : {{ values.VPS_avcnt_4 }} ea   Used % : {{ values.VPS_perc_4 }}%<br>
+            <br>
+            {% endif %}
+            basic IP - Total : {{ values.basic_ipTotal }} ea   Available : {{ values.basic_ipAvailable }} ea   Used % : {{ values.basic_perc_Used }} %<br>
+            {% if key == 'Zone_1' %}
+                vps IP - Total : {{ values.vps_ipTotal }} ea   Available : {{ values.vps_ipAvailable }} ea Used % : {{ values.vps_perc_Used }}%<br>
+            {% endif %}
+            <br>
+
+            {% if values.basic_over_perc_8 %}
+                basic NC 8G 기준 사용률 : {{ values.basic_std_perc }}%<br>
+                basic NC 8G VM 생성 사용률 : {{ values.basic_perc_8 }}% 입니다. {{ values.basic_over_perc_8 }}% 초과<br>
+                {{ values.basic_vm_cnt_8 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.basic_nc_cnt_8 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.basic_over_perc_16 %}
+                basic NC 16G 기준 사용률 : {{ values.basic_std_perc }}%<br>
+                basic NC 16G VM 생성 사용률 : {{ values.basic_perc_16 }}% 입니다. {{ values.basic_over_perc_16 }}% 초과<br>
+                {{ values.basic_vm_cnt_16 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.basic_nc_cnt_16 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.premium_over_perc_32 %}
+                premium NC 32G 기준 사용률 : {{ values.premium_std_perc }}%<br>
+                premium NC 32G VM 생성 사용률 : {{ values.premium_perc_32 }}% 입니다. {{ values.premium_over_perc_32 }}% 초과<br>
+                {{ values.premium_vm_cnt_32 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.premium_nc_cnt_32 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.premium_over_perc_64 %}
+                premium NC 64G 기준 사용률 : {{ values.premium_std_perc }}%<br>
+                premium NC 64G VM 생성 사용률 : {{ values.premium_perc_64 }}% 입니다. {{ values.premium_over_perc_64 }}% 초과<br>
+                {{ values.premium_vm_cnt_64 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.premium_nc_cnt_64 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.premium_over_perc_128 %}
+                premium NC 128G 기준 사용률 : {{ values.premium_std_perc }}%<br>
+                premium NC 128G VM 생성 사용률 : {{ values.premium_perc_128 }}% 입니다. {{ values.premium_over_perc_128 }}% 초과<br>
+                {{ values.premium_vm_cnt_128 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.premium_nc_cnt_128 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.WAF_over_perc_4 %}
+                WAF NC 4G 기준 사용률 : {{ values.WAF_std_perc }}%<br>
+                WAF NC 4G VM 생성 사용률 : {{ values.WAF_perc_4 }}% 입니다. {{ values.WAF_over_perc_4 }}% 초과<br>
+                {{ values.WAF_vm_cnt_4 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.WAF_nc_cnt_4 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.WAF_over_perc_8 %}
+                WAF NC 8G 기준 사용률 : {{ values.WAF_std_perc }}%<br>
+                WAF NC 8G VM 생성 사용률 : {{ values.WAF_perc_8 }}% 입니다. {{ values.WAF_over_perc_8 }}% 초과<br>
+                {{ values.WAF_vm_cnt_8 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.WAF_nc_cnt_8 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.SSD_over_perc_8 %}
+                SSD NC 8G 기준 사용률 : {{ values.SSD_std_perc }}%<br>
+                SSD NC 8G VM 생성 사용률 : {{ values.SSD_perc_8 }}% 입니다. {{ values.SSD_over_perc_8 }}% 초과<br>
+                {{ values.SSD_vm_cnt_8 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.SSD_nc_cnt_8 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.SSD_over_perc_16 %}
+                SSD NC 16G 기준 사용률 : {{ values.SSD_std_perc }}%<br>
+                SSD NC 16G VM 생성 사용률 : {{ values.SSD_perc_16 }}% 입니다. {{ values.SSD_over_perc_16 }}% 초과<br>
+                {{ values.SSD_vm_cnt_16 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.SSD_nc_cnt_16 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.SSD_over_perc_32 %}
+                SSD NC 32G 기준 사용률 : {{ values.SSD_std_perc }}%<br>
+                SSD NC 32G VM 생성 사용률 : {{ values.SSD_perc_32 }}% 입니다. {{ values.SSD_over_perc_32 }}% 초과<br>
+                {{ values.SSD_vm_cnt_32 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.SSD_nc_cnt_32 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.MSSQL_over_perc_8 %}
+                MSSQL NC 8G 기준 사용률 : {{ values.MSSQL_std_perc }}%<br>
+                MSSQL NC 8G VM 생성 사용률 : {{ values.MSSQL_perc_8 }}% 입니다. {{ values.MSSQL_over_perc_8 }}% 초과<br>
+                {{ values.MSSQL_vm_cnt_8 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.MSSQL_nc_cnt_8 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if values.MSSQL_over_perc_16 %}
+                MSSQL NC 16G 기준 사용률 : {{ values.MSSQL_std_perc }}%<br>
+                MSSQL NC 16G VM 생성 사용률 : {{ values.MSSQL_perc_16 }}% 입니다. {{ values.MSSQL_over_perc_16 }}% 초과<br>
+                {{ values.MSSQL_vm_cnt_16 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.MSSQL_nc_cnt_16 }} 대가 필요합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if key == 'Zone_1' %}
+                {% if values.VPS_over_perc_2 %}
+                    VPS NC 2G 기준 사용률 : {{ values.VPS_std_perc }}%<br>
+                    VPS NC 2G VM 생성 사용률 : {{ values.VPS_perc_2 }}% 입니다. {{ values.VPS_over_perc_2 }}% 초과<br>
+                    {{ values.VPS_vm_cnt_2 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.VPS_nc_cnt_2 }} 대가 필요합니다.<br>
+                    <br>
+                {% endif %}
+
+                {% if values.VPS_over_perc_4 %}
+                    VPS NC 4G 기준 사용률 : {{ values.VPS_std_perc }}%<br>
+                    VPS NC 4G VM 생성 사용률 : {{ values.VPS_perc_4 }}% 입니다. {{ values.VPS_over_perc_4 }}% 초과<br>
+                    {{ values.VPS_vm_cnt_4 }}개 의 VM 용량을 추가해야 하며 NC Server는 {{ values.VPS_nc_cnt_4 }} 대가 필요합니다.<br>
+                    <br>
+                {% endif %}
+            {% endif %}
+
+            {% if values.basic_over_perc %}
+                basic IP 기준 사용률 : {{ values.ip_std_perc }}%<br>
+                basic IP 사용률 : {{ values.basic_perc_Used }}% 입니다. {{ values.basic_over_perc }}% 초과<br>
+                {{ values.basic_ip_cnt }}개 의 IP를 추가해야 합니다.<br>
+                <br>
+            {% endif %}
+
+            {% if key == 'Zone_1' %}
+                {% if values.vps_over_perc %}
+                    VPS IP 기준 사용률 : {{ values.ip_std_perc }}%<br>
+                    VPS IP 사용률 : {{ values.vps_perc_Used }}% 입니다. {{ values.vps_over_perc }}% 초과<br>
+                    {{ values.vps_ip_cnt }}개 의 IP를 추가해야 합니다.<br>
+                    <br>
+                {% endif %}
+            {% endif %}
+
+    {% endfor %}
+    <br>

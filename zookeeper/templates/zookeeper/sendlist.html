@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<script>
+$(function(){
+
+    $('#slide-submenu').on('click',function() {
+        $(this).closest('.list-group').fadeOut('slide',function(){
+                $('.mini-submenu').fadeIn();
+        });
+
+      });
+
+        $('.mini-submenu').on('click',function(){
+        $(this).next('.list-group').toggle('slide');
+        $('.mini-submenu').hide();
+        })
+})
+</script>
+
+<style>
+.mini-submenu{
+  display:none;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  border-radius: 4px;
+  padding: 9px;
+  /*position: relative;*/
+  width: 42px;
+
+}
+
+.mini-submenu:hover{
+  cursor: pointer;
+}
+
+.mini-submenu .icon-bar {
+  border-radius: 1px;
+  display: block;
+  height: 2px;
+  width: 22px;
+  margin-top: 3px;
+}
+
+.mini-submenu .icon-bar {
+  background-color: #000;
+}
+
+#slide-submenu{
+  background: rgba(0, 0, 0, 0.45);
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SendMsg List</title>
+<!--    <link rel="stylesheet" href="/static/bootstrap/4.1.2/css/bootstrap.css">-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2 col-xs-2 sidebar">
+            <div class="mini-submenu">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </div>
+            <div class="list-group">
+                <span href="#" class="list-group-item active">
+                    MENU
+                    <span class="pull-right" id="slide-submenu">
+                        <i class="fa fa-times"></i>
+                    </span>
+                </span>
+                <a href="/zookeeper/" class="list-group-item">Home</a>
+                <a href="/zookeeper/nodelist/" class="list-group-item">Node List</a>
+                <a href="/zookeeper/excludenode/" class="list-group-item">ExcludeNode List</a>
+                <a href="/zookeeper/sendmsg/" class="list-group-item">SendMsg List</a>
+<!--            <a href="#" class="list-group-item">
+                <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
+            </a>-->
+            </div>
+        </div>
+        <div class="span10 col-xs-8">
+    <table class="table table-striped">
+        <thread>
+        <tr>
+            <th>num</th>
+            <th>text</th>
+            <th>CreateTime</th>
+        </tr>
+        </thread>
+    {% if send_list %}
+        <tbody>
+        {% for send in send_list %}
+        <tr>
+            <td>{{ send.id }}</td>
+            <td>{{ send.text }}</td>
+            <td>{{ send.createtime }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    {% else %}
+        <p>No send list are available.</p>
+    {% endif %}
+    </table>
+<!--
+    <div class="text-center">
+        <ul class="pagination">
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+        </ul>
+    </div>
+-->
+</div>
+</div>
+</div>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<!--<script src="/static/bootstrap/4.1.2/js/bootstrap.js></script>-->
+</body>
+</html>

@@ -1,0 +1,130 @@
+<html>
+<head>
+	<link type="text/css" href="my_style.css">
+</head>
+<body>
+<!--	<font color="red" face="Dotum">Hello</font>
+	<font color="yellow">World</font>-->
+</body>
+
+<script language="JavaScript" type="text/javascript">
+function layer_toggle(obj) {
+  if (obj.style.display=='none') obj.style.display = 'block';
+  else if (obj.style.display=='block') obj.style.display = 'none';
+}
+</script>
+
+<div style="display: block" id="node01">
+   <a onclick="layer_toggle(document.getElementById('node01')); layer_toggle(document.getElementById('node02')); return false;" href="#">
+      <p><li>Node List</li></p>
+   </a>
+</div>
+<div style="display: none" id="node02">
+   <a onclick="layer_toggle(document.getElementById('node01')); layer_toggle(document.getElementById('node02')); return false;" href="#">
+      <p><li>Node List</li></p>
+   </a>
+
+<table cellspacing=1 width=700 border=1>
+    <tr>
+<!--
+        <td><p align=center>Id</p>
+        </td>
+-->
+        <td><p align=center>privateIp</p></td>
+        <td><p align=center>HostType</p></td>
+        <td><p align=center>state</p></td>
+        <td><p align=center>CreateTime</p></td>
+        <td><p align=center>DeleteTime</p></td>
+    </tr>
+
+{% if node_list %}
+    <ul>
+    {% for node in node_list %}
+    <tr>
+<!--    <td><p align=center>{{ node.privateIpId }}</p></td>-->
+    <td><p align=center>{{ node.privateIp }}</p></td>
+    <td><p align=center>{{ node.hosttype }}</p></td>
+    <td><p align=center>{{ node.state }}</p></td>
+    <td><p align=center>{{ node.createtime }}</p></td>
+    <td><p align=center>{{ node.deletetime }}</p></td>
+    </tr>
+<!--        <li>{{ node.privateIp }} {{ node.state }} {{ node.createtime }}</a></li>-->
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No node list are available.</p>
+{% endif %}
+</table>
+</div>
+<p>
+
+<table cellspacing=1 width=700 border=1>
+    <li>Exclude List</li>
+    <tr>
+        <td><p align=center>privateIp</p>
+        </td>
+        <td><p align=center>text</p>
+        </td>
+<!--        <td><p align=center>state</p></td>-->
+        <td><p align=center>CreateTime</p>
+        </td>
+<!--        <td><p align=center>DeleteTime</p></td>-->
+    </tr>
+
+{% if exclude_list %}
+    <ul>
+    {% for exclude in exclude_list %}
+    <tr>
+    <td><p align=center>{{ exclude.privateIpId.privateIp }}</p></td>
+    <td><p align=center>{{ exclude.text }}</p></td>
+<!--    <td><p align=center>{{ exclude.state }}</p></td>-->
+    <td><p align=center>{{ exclude.createtime }}</p></td>
+<!--    <td><p align=center>{{ exclude.deletetime }}</p></td>-->
+    </tr>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No exclude list are available.</p>
+{% endif %}
+</table>
+
+<table>
+    <tr>
+        <td><input type=button value="작성" OnClick="window.location='/zookeeper/show_write_form/'"></td>
+<!--        <td><form name=searchf method=post action="/searchWithSubject/">
+        <p align=right><input type=text name=searchStr size=50  maxlength=50>
+        <input type=submit value="검색"></p>
+        </td>
+-->
+    </tr>
+</table>
+
+<p>
+
+<table cellspacing=1 width=700 border=1>
+    <li>Send List</li>
+    <tr>
+        <td><p align=center>privateIp</p>
+        </td>
+        <td><p align=center>text</p>
+        </td> 
+        <td><p align=center>CreateTime</p>
+        </td>
+    </tr> 
+
+{% if send_list %}
+    <ul>
+    {% for send in send_list %}
+    <tr>
+    <td><p align=center>{{ send.privateIpId.privateIp }}</p></td>
+    <td><p align=center>{{ send.text }}</p></td>
+    <td><p align=center>{{ send.createtime }}</p></td>
+    </tr>
+<!--        <li>{{ send.privateIpId }} {{ send.state }} {{ send.createtime }}</a></li>-->
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No send list are available.</p>
+{% endif %}
+</table>
+</html>
